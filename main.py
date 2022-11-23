@@ -30,7 +30,8 @@ tester = TestPerformance(env_name, agent)
 for idx, batch in enumerate(trajectories):
     
     agent.update(batch)
-    if idx%1000 == 0:
-        score = tester()
+    if (str(idx)[-3:]) == '000':
+        score = tester(3)
         wandb.log({'score':score})
-        agent.save("")
+    if (str(idx)[-4:]) == '0000':
+        agent.save(f"{idx}_")
