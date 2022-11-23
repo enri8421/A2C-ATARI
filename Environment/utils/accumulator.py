@@ -35,7 +35,7 @@ class BatchAccumulator:
     
     def get_batch(self, values):
         ref_values = self.compute_ref_values(values)
-        advs = ref_values - self.mb_rewards
+        advs = ref_values - self.mb_values
         
         states = np.reshape(self.mb_states, (-1,) + self.obs_shape)
         ref_values = ref_values.flatten()
