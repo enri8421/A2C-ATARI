@@ -1,0 +1,42 @@
+{
+    "os": "Windows-10-10.0.19044-SP0",
+    "python": "3.10.8",
+    "heartbeatAt": "2022-11-24T12:38:30.624301",
+    "startedAt": "2022-11-24T12:38:29.446459",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "C:\\Users\\Enrico\\Desktop\\A2C-ATARI\\train_env_model.py",
+    "codePath": "train_env_model.py",
+    "git": {
+        "remote": "git@github.com:enri8421/A2C-ATARI.git",
+        "commit": "c222805d71cef36f81fb967bfd4e24347c9165a0"
+    },
+    "email": "bianchie@ethz,ch",
+    "root": "C:/Users/Enrico/Desktop/A2C-ATARI",
+    "host": "DESKTOP-0V9LN43",
+    "username": "Enrico",
+    "executable": "C:\\Users\\Enrico\\anaconda3\\envs\\rl\\python.exe",
+    "cpu_count": 2,
+    "cpu_count_logical": 4,
+    "cpu_freq": {
+        "current": 2511.0,
+        "min": 0.0,
+        "max": 2712.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2511.0,
+            "min": 0.0,
+            "max": 2712.0
+        }
+    ],
+    "disk": {
+        "total": 117.05566024780273,
+        "used": 110.57830429077148
+    },
+    "memory": {
+        "total": 7.9190521240234375
+    }
+}

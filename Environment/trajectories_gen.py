@@ -29,4 +29,24 @@ class TrajectoriesGenerator:
             values = self.agent(states, only_values = True)
             
             yield batch_accumulator.get_batch(values)
+            
+            
+
+
+class MultiAgentTransitionGenerator:
+    def __init__(self, envs, agents):
+        assert len(envs) == len(agents)
+        
+        self.envs = envs
+        self.agents = agents        
+        
+    def __iter__(self):
+        states = [env.reset() for env in self.envs]
+        while True:
+            actions = [agent(state)[1] for agent, state in zip(self.agents, states)]
+            new_states, rewards, dones = (list(t) for t in zip(*(
+                                (env.step(action) for env, action in zip(self.envs, actions)))))
+            yield np.vstack(states), np.hstack(actions), np.hstack(rewards), \
+                 np.hstack(dones), np.vstack(new_states)
+            states = new_states
 
