@@ -32,7 +32,7 @@ def analyse_logits(logits, actions):
     
     
 def broadcast_actions(actions, size):
-    act_broadcasted = torch.FloatTensor(*size, device=actions.device)
+    act_broadcasted = torch.FloatTensor(*size).to(actions.device)
     act_broadcasted.zero_()
     act_broadcasted[range(size[0]), actions] = 1.0
     return act_broadcasted
