@@ -28,7 +28,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 IDX = [400000, 420000, 440000, 460000, 480000]
 num_agents = len(IDX)
 
-paths = [f"base_weight/_{idx}" for idx in IDX]
+paths = [f"base_weight/{idx}_" for idx in IDX]
 envs = [BasicVec(env_name, n_envs) for _ in range(num_agents)]
 agents = [BaseAgent(envs[0].obs_shape, envs[0].n_actions, device, config, load_path=path) for path in paths]
 
