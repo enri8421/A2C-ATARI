@@ -59,7 +59,7 @@ for idx, transition in enumerate(transitions):
         #wandb.log({'state_loss':delta_loss, 'reward_loss':reward_loss})
         pass
     if (str(idx)[-5:]) == '00000':
-        torch.save(net.state_dict(), f"{idx}_EM.pt")
+        torch.save(net.state_dict(), f"envmodel_weight/{idx}_EM.pt")
         
     break
     
