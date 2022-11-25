@@ -16,7 +16,7 @@ class TestPerformance:
             done = False
             state = self.env.reset()
             while not done:
-                _, action = self.agent(np.expand_dims(state, 0))
+                action = self.agent(np.expand_dims(state, 0))[1]
                 state, reward, done, _ = self.env.step(action.squeeze())
                 tot_rewards += reward
         return tot_rewards/n_trials

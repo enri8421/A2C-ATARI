@@ -6,7 +6,7 @@ import torch.nn.utils as nn_utils
 import numpy as np
 
 
-from Agent.module import ActorCritic
+from Agent.modules import ActorCritic
 from Agent.utils import preprocess_states, unpack_batch, analyse_logits
 
 class BaseAgent:
@@ -27,14 +27,15 @@ class BaseAgent:
         with torch.no_grad():
             logits, values = self.net(states)
         if only_values: return values.cpu().numpy().squeeze()
+        probs = F.softmax(logits, dim=1)
         actions = Categorical(logits=logits).sample()
-        return values.cpu().numpy().squeeze(), actions.cpu().numpy().astype(np.int32)
+        return values.cpu().numpy().squeeze(), actions.cpu().numpy().astype(np.int32), probs.cpu().numpy()
     
     
     def update(self, batch):
         self.optimizer.zero_grad()
         
-        states, ref_values, advs, actions = unpack_batch(batch, self.device)
+        states, ref_values, advs, _, actions = unpack_batch(batch, self.device)
         logits, values = self.net(states)
         probs, entropy = analyse_logits(logits, actions)
         

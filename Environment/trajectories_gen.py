@@ -12,18 +12,19 @@ class TrajectoriesGenerator:
         self.n_envs = self.envs.n
         self.n_steps = n_steps
         self.obs_shape = self.envs.obs_shape
+        self.n_actions = self.envs.n_actions
         self.gamma = gamma
         
         
     def __iter__(self):
         states = self.envs.reset()
-        batch_accumulator = BatchAccumulator(self.n_steps, self.n_envs, self.obs_shape, self.gamma)
+        batch_accumulator = BatchAccumulator(self.n_steps, self.n_envs, self.obs_shape, self.n_actions, self.gamma)
         
         while True:
             for idx in range(self.n_steps):
-                values, actions = self.agent(states)
+                values, actions, probs = self.agent(states)
                 new_states, rewards, dones = self.envs.step(actions)
-                batch_accumulator.add(idx, states, values, actions, rewards, dones)
+                batch_accumulator.add(idx, states, values, probs, actions, rewards, dones)
                 states = new_states 
             
             values = self.agent(states, only_values = True)
